@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Rests;
 using Terraria;
 using TerrariaApi.Server;
 using TShockAPI;
@@ -101,10 +102,11 @@ namespace ZHIPlayerManager
             GetDataHandlers.PlayerHP.Register(OnHPChange);
             //配置文件的更新
             GeneralHooks.ReloadEvent += OnReload;
+			//REST接口
+			TShock.RestApi.Register(new SecureRestCommand("/rankdata", RankData, "rank.use"));
 
-
-            #region 指令
-            Commands.ChatCommands.Add(new Command("", Help, "zhelp")
+			#region 指令
+			Commands.ChatCommands.Add(new Command("", Help, "zhelp")
             {
                 HelpText = "输入 /zhelp  来查看指令帮助"
             });
